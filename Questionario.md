@@ -2,6 +2,10 @@
 
 ## 1. Explique brevemente o que é compilação cruzada (***cross-compiling***) e para que ela serve.
 
+   A compilação cruzada (***cross-compiling***) consiste no processo de criar um código executável em uma plataforma (sistema operacional) diferente daquela em que o compilador está sendo executado. Esse processo é utilizado para criação de softwares multiplataforma e para desenvolvimento de softwares embarcados.
+   
+   No caso de softwares embarcados, temos o sistema embarcado (target): microcontrolador STM32 Arquitetura ARM Cortex M4. E temos o a máquina de desenvolimento (host): arquitetura Linux. O código é escrito no (host) compilado utilizando o St link para ser executado no (target).
+
 ## 2. O que é um código de inicialização ou ***startup*** e qual sua finalidade?
 
 ## 3. Sobre o utilitário **make** e o arquivo **Makefile responda**:
