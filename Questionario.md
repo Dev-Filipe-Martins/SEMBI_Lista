@@ -2,23 +2,67 @@
 
 ## 1. Explique brevemente o que é compilação cruzada (***cross-compiling***) e para que ela serve.
 
-   A compilação cruzada (***cross-compiling***) consiste no processo de criar um código executável em uma plataforma (sistema operacional) diferente daquela em que o compilador está sendo executado. Esse processo é utilizado para criação de softwares multiplataforma e para desenvolvimento de softwares embarcados.
-   
-   No caso de softwares embarcados, temos o sistema embarcado (target): microcontrolador STM32 Arquitetura ARM Cortex M4. E temos o a máquina de desenvolimento (host): arquitetura Linux. O código é escrito no (host) compilado utilizando o St link para ser executado no (target).
+   A compilação cruzada (***cross-compiling***) consiste no processo de compilar um código executável em uma arquitetura (sistema operacional) diferente daquela em que o compilador está sendo executado. Basicamente, podemos escrever um código em um computador e compilá-lo para ser executado em outra plataforma com arquitetura ou sistema operacional diferente. 
+   Esse processo é utilizado para criação de softwares multiplataforma e para desenvolvimento de softwares embarcados.
 
+   No caso de softwares embarcados, temos o sistema embarcado (target): microcontrolador STM32 Arquitetura ARM Cortex M4. E temos a máquina de desenvolimento (host): arquitetura Linux. O código é escrito no (host) compilado utilizando o St link para ser executado no (target).
+    
 ## 2. O que é um código de inicialização ou ***startup*** e qual sua finalidade?
 
+   O código de inicialização (startup) tem o papel de iniciar uma rotina intermediária de instruções que executa algumas tarefas antes da chamada da função main(). Um arquivo do tipo (startup.c) possui o código de inicialização responsavel por executar as tarefas de inicialização quando um programa é iniciado.
+
+   Sua finalidade é preparar o ambiente para que o programa possa funcionar corretamente. Basicamente o código de inicialização carrega as bibliotecas necessárias, configura as variáveis de ambiente, inicializa os objetos do programa, executa outras tarefas de inicialização e no caso da arquitetura ARM cortex-M também deve realizar a alocação da tabela de vetores de interrupção na memória.
+
+   O código de inicialização garante que o programa seja configurado corretamente e que tenha os recursos necessarios para funcionar.
+   
 ## 3. Sobre o utilitário **make** e o arquivo **Makefile responda**:
 
 #### (a) Explique com suas palavras o que é e para que serve o **Makefile**.
 
+   O Makefile é o arquivo que contém as instruções necessárias para que o utilitário Make seja capaz de compilar os arquivos, programas e bibliotecas de forma automática. Contendo os comandos de compilação que devem ser utilizados e como lidar com os erros.
+   As instruçoes no Makefile possui 5 tipos de elementos, sendo eles: regras explícitas, regras implícitas, definições de variávveis, diretivas e comentários.
+
 #### (b) Descreva brevemente o processo realizado pelo utilitário **make** para compilar um programa.
+
+   O utilitário make usa o arquivo texto (Makefile) para determinar quais arquivos precisam ser compilados e como compila-los. O make utiliza a base de dados do (Makefile) e a data de modificação dos arquivos para decidir de forma automática quais arquivos precisam ser atualizados, e quais os arquivos que precisam ser compilados novamente, executando os comandos de registro na base de dados para cada um desses arquivos e exibe mensagens de erro caso ocorrer algum problema de compilação.
 
 #### (c) Qual é a sintaxe utilizada para criar um novo **target**?
 
+   Um Makefile consiste de "Regras" na seguinte sintaxe:
+
+      target … : prerequisites …
+        recipe
+        …
+        …
+   
+   A prerequisite is a file that is used as input to create the target. A target often depends on several files.
+
+   Os targets e prerequisites são nomes de arquivos separados por espaços.
+
+   O target é o arquivo objeto que desejamos gerar. prerequisistes é a dependencia mínima para gerar o arquivo. Recipe é a linha de comando que deve ser utilizada para gerar o arquivo alvo.
+
 #### (d) Como são definidas as dependências de um **target**, para que elas são utilizadas?
 
+   
+
+
+
+
 #### (e) O que são as regras do **Makefile**, qual a diferença entre regras implícitas e explícitas?
+
+
+   As regras do Makefile são instruçoes que definem como o utilitário make deve construir um determinado alvo
+
+   As regras implícitas dizem quando e como refazer arquivos. Ela descrevev como um alvo pode depender de um arquivo com um nome semelhante ao alvo e fornece uma receita para criar ou atualizar este alvo.
+   - São predefinidas pelo utilitário make
+   - Não precisam ser escritas no Makefile
+   - São usadas para construir arquivos de objeto a partir de arquivos de origem
+
+   As regras explicitas lista os arquivos dos quais os alvos dependem, chamados de pré-requisitos do alvo. Tamvém fornece instruçoes ou uma receita para criar ou atualizar os alvos.
+   - Sáo definidas pelo usuários no Makefile
+   - São necessarias para construir targets que não podem ser construidos com regras implicitas
+   
+
 
 ## 4. Sobre a arquitetura **ARM Cortex-M** responda:
 
