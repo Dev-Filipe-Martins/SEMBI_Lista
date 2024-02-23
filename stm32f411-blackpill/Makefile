@@ -10,8 +10,8 @@ CFLAGS = -mcpu=cortex-m4 -mthumb -Wall -O0
 #SRCS = startup.c main.c
 #OBJS = $(addsufix .o, $(basename $(SRCS)))
 # Outra forma:
-OBJS = $(patsubst %, %.o, startup main)
-#OBJS = $(patsubst %, %.o, $(basename $(SRCS)))
+#OBJS = $(patsubst %, %.o, startup main)
+OBJS = $(patsubst %, %.o, $(basename $(SRCS)))
 
 #all: startup.o main.o
 all: $(OBJS)
