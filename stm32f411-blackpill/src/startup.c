@@ -1,27 +1,19 @@
 /****************************************************************************
- * main.c
+ * startup.c
  *
- *   Authors: Daniel Pereira de Carvalho <daniel.carvalho@ufu.br>
- *            Marcelo Barros de Almeida  <marcelo.barros@ufu.br>
- *
- *   Aluno: Filipe Ferreira Martins (11911EAU021)
-****************************************************************************/
-
-/****************************************************************************
- * Included Files
+ *   Aluno: Filipe Ferreira Martins (11911EAU021) <filipe.ferreira.feelt@ufu.br>
+ * 
 ****************************************************************************/
 
 #include <stdint.h>
 
-/****************************************************************************
- * Pre-processor Definitions
-****************************************************************************/
+// Definição do endereço de início da stack
 
-#define SRAM_START  0x20000000U                  /* Inicio da SRAM CORTEX-M */
-#define SRAM_SIZE   (128U * 1024U)               /* Tam. SRAM STM32F411 128K */
-#define SRAM_END    ((SRAM_START) + (SRAM_SIZE)) /* Final da SRAM STM32F411 */
+#define SRAM_START  0x20000000U                   /* Inicio da SRAM CORTEX-M */
+#define SRAM_SIZE   (128U * 1024U)                /* Tam. SRAM STM32F411 128K */
+#define SRAM_END    ((SRAM_START) + (SRAM_SIZE))  /* Final da SRAM STM32F411 */
 
-#define STACK_START SRAM_END                     /* Inicio da Stack */
+#define STACK_START SRAM_END                      /* Inicio da Stack */
 
 /****************************************************************************
  * Private Function Prototypes
@@ -30,6 +22,7 @@
 int main(void);
 
 /* Prototipos de funções para as System Exceptions */
+// Vetores de interrupção para Built-in Exceptions
 
 void reset_handler     (void);
 void nmi_handler       (void) __attribute__ ((weak, alias("default_handler")));
@@ -42,8 +35,8 @@ void debugmon_handler  (void) __attribute__ ((weak, alias("default_handler")));
 void pendsv_handler    (void) __attribute__ ((weak, alias("default_handler")));
 void systick_handler   (void) __attribute__ ((weak, alias("default_handler")));
 
-
 // irq para diferenciar periférico da cpu
+// External Interrupts
 
 void wwdg_irqhandler            (void) __attribute__ ((weak, alias("default_handler")));
 void pvd_irqhandler             (void) __attribute__ ((weak, alias("default_handler")));
@@ -208,7 +201,6 @@ void reset_handler(void)
   uint32_t i;
 
   /* Carrega secao data da FLASH para a SRAM */
-
   /* Copia a secao .data para a RAM */
    
   uint32_t size = (uint32_t)&_edata - (uint32_t)&_sdata;
