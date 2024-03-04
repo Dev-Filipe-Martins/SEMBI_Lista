@@ -21,10 +21,11 @@ RM = rm -rf
 #OBJDIR = src/build
 OBJDIR = build
 # Diretórios onde os arquivos das listas de dependências (.d) serão salvos:
+#DEPDIR = src/.deps
 DEPDIR = .deps
 
 # Arquivos a serem compilados
-SRCS = startup.c  main.c
+SRCS = src/startup.c  src/main.c
 
 # Flags do compilador e linker
 # Flag do compilador
@@ -34,10 +35,12 @@ DEPFLAGS = -MMD -MP -MF $(DEPDIR)/$*.d
 
 # Gera uma lista de arquivos objeto utilizando os arquivos fonte
 OBJS = $(patsubst %, $(OBJDIR)/%.o, $(basename $(SRCS)))
-DEPS = $(patsubst %, $(DEPDIR)/%.d, $(basename $(SRCS)))
-
 # Cria diretorios onde serao armazenados arquivos objeto
 $(shell mkdir -p $(dir $(OBJS)) > /dev/null)
+
+# Gera uma lista de arquivos objeto utilizando os arquivos fonte
+DEPS = $(patsubst %, $(DEPDIR)/%.d, $(basename $(SRCS)))
+# Cria diretorios onde serao armazenados arquivos objeto
 $(shell mkdir -p $(dir $(DEPS)) > /dev/null)
 
 all: $(OBJS)
